@@ -1,0 +1,26 @@
+# Contrastive Learning Results (CIFAR-10)
+
+Run 1: 1-epoch snapshot (encoder_epoch_1.pt)
+- Pretraining: epochs=1, temperature=0.2, batch_size=128/256, optimizer=AdamW (lr=.001, weight_decay=.0001)
+- Classifier: epochs=20, lr=.001, batch_size=256
+- Test metrics: 
+  - accuracy = 0.4599
+  - precision = 0.4591
+  - recall = 0.4599
+  - f1 = 0.4559
+  - auc = 0.8651
+  - checkpoint = ./checkpoints/encoder_epoch_1.pt
+
+Run 2: 50-epoch snapshot (encoder_epoch_50.pt)
+- Pretraining: epochs=50, temperature=0.2, batch_size=128/256, optimizer=AdamW (lr=.001, weight_decay=.0001)
+- Classifier: epochs=20, lr=.001, batch_size=256
+- Test metrics:
+  - accuracy = 0.6189
+  - precision = 0.6187
+  - recall = 0.6189
+  - f1 = 0.6164
+  - auc = 0.9320
+  - checkpoint = ./checkpoints/encoder_epoch_50.pt
+
+Summary:
+After 1 epoch of contrastive pretraining we get ~46% accuracy (AUC ~0.87); after 50 epochs, accuracy improves to ~62% (AUC ~0.93).
