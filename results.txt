@@ -1,7 +1,8 @@
 # Contrastive Learning Results (CIFAR-10)
+# Commands used for each run can be directly found in the README
 
-Run 1: 1-epoch snapshot (encoder_epoch_1.pt)
-- Pretraining: epochs=1, temperature=0.2, batch_size=128/256, optimizer=AdamW (lr=.001, weight_decay=.0001)
+Test 1: 1-epoch snapshot, tau = 0.2
+- Pretraining: 50-epoch run, using the epoch 1 snapshot, temperature=0.2, batch_size=128/256, optimizer=AdamW (lr=.001, weight_decay=.0001)
 - Classifier: epochs=20, lr=.001, batch_size=256
 - Test metrics: 
   - accuracy = 0.4599
@@ -11,7 +12,18 @@ Run 1: 1-epoch snapshot (encoder_epoch_1.pt)
   - auc = 0.8651
   - checkpoint = ./checkpoints/encoder_epoch_1.pt
 
-Run 2: 50-epoch snapshot (encoder_epoch_50.pt)
+Test 2: 20-epoch snapshot, tau = 0.2
+- Pretraining: 50-epoch run, using the epoch 20 snapshot, temperature=0.2, batch_size=128, AdamW (lr=.001, weight_decay=.0001)
+- Classifier: epochs=20, lr=.001, batch_size=256
+- Test metrics:
+  - accuracy = 0.5725
+  - precision = 0.5706
+  - recall = 0.5725
+  - f1 = 0.5704
+  - auc = 0.9155
+  - checkpoint = ./checkpoints/encoder_epoch_20.pt
+
+Test 3: 50-epoch pretraining, tau = 0.2
 - Pretraining: epochs=50, temperature=0.2, batch_size=128/256, optimizer=AdamW (lr=.001, weight_decay=.0001)
 - Classifier: epochs=20, lr=.001, batch_size=256
 - Test metrics:
@@ -22,5 +34,26 @@ Run 2: 50-epoch snapshot (encoder_epoch_50.pt)
   - auc = 0.9320
   - checkpoint = ./checkpoints/encoder_epoch_50.pt
 
-Summary:
-After 1 epoch of contrastive pretraining we get ~46% accuracy (AUC ~0.87); after 50 epochs, accuracy improves to ~62% (AUC ~0.93).
+Test 4: 20-epoch pretraining, tau = 0.5
+- Pretraining: epochs=20, temperature=0.5, batch_size=128, AdamW (lr=.001, weight_decay=.0001)
+- Classifier: epochs=20, lr=.001, batch_size=256
+- Test metrics:
+  - accuracy = 0.5333
+  - precision = 0.5415
+  - recall = 0.5333
+  - f1 = 0.5318
+  - auc = 0.9008
+  - checkpoint = ./checkpoints_tau05/encoder_epoch_20.pt
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [ Summary ] ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Effect of pretraining length (tau = 0.2):
+  - 1 epoch -> acc ~= 46.0%, AUC ~= 0.87
+  - 20 epochs -> acc ~= 57.3%, AUC ~= 0.92
+  - 50 epochs -> acc ~= 61.9%, AUC ~= 0.93
+  Longer contrastive pretraining consistently improves downstream accuracy and AUC.
+
+- Effect of temperature at fixed 20 epochs:
+  - tau = 0.2 -> acc ~= 57.3%, AUC ~= 0.92
+  - tau = 0.5 -> acc ~= 53.3%, AUC ~= 0.90
+  At 20 epochs, a lower temperature (0.2) gives better representations than a higher one (0.5) under this setup.

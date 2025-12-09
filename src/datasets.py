@@ -15,17 +15,17 @@ class ContrastiveTransformCIFAR10:
         normalize = transforms.Normalize(CIFAR10_MEAN, CIFAR10_STD)
 
         self.transform_view1 = transforms.Compose([
-            transforms.RandomResizedCrop(size=32, scale=(0.6, 1.0)),  # geometric
+            transforms.RandomResizedCrop(size=32, scale=(0.6, 1.0)), #~~~ geometric
             transforms.RandomHorizontalFlip(p=0.5),
             transforms.RandomRotation(degrees=20),
-            transforms.ColorJitter(                         # photometric
+            transforms.ColorJitter( #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ photometric
                 brightness=0.4, contrast=0.4,
                 saturation=0.4, hue=0.1
             ),
-            transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 2.0)),  # blur
+            transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 2.0)), #~~ blur
             transforms.ToTensor(),
             normalize,
-            transforms.RandomErasing(                    # occlusion
+            transforms.RandomErasing( #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ occlusion
                 p=0.2, scale=(0.02, 0.15),
                 ratio=(0.3, 3.3), value=0, inplace=False
             ),
@@ -74,11 +74,6 @@ def get_cifar10_contrastive_dataloader(data_dir: str, batch_size: int, num_worke
         drop_last=True,
     )
     return train_loader
-
-
-# add near top if not already there:
-# from torchvision import datasets, transforms
-# from torch.utils.data import DataLoader
 
 def get_cifar10_eval_dataloaders(
     data_dir: str,
