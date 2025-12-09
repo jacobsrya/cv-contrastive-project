@@ -1,4 +1,4 @@
-# --------------------------------------[ Contrastive Learning on CIFAR-10 ] --------------------------------------
+# -------[ Contrastive Learning on CIFAR-10 ]-------
 
 Course project for **EEL4930/5930 - Computer Vision**: self-supervised contrastive learning on CIFAR-10 with downstream classification.
 
@@ -8,7 +8,7 @@ This repository implements:
 - A **downstream classifier** stage on frozen embeddings (supervised).
 
 
-# --------------------------------------[ 1. Project Structure ]--------------------------------------
+# --------------[ Project Structure ]--------------
 
 ```text
 cv-contrastive-project/
@@ -25,7 +25,7 @@ cv-contrastive-project/
 ```
 
 
-# --------------------------------------[ Setup ]--------------------------------------
+# --------------------[ Setup ]--------------------
 
 ```bash
 git clone https://github.com/jacobsrya/cv-contrastive-project
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ```
 
 
-# --------------------------------------[ Reproducing Experiments ]--------------------------------------
+# -----------[ Reproducing Experiments ]-----------
 
 All of these commands were run ON WINDOWS from the project root with the virtual environment activated (`(.venv)` showing in the prompt).
 
