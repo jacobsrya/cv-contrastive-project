@@ -8,7 +8,7 @@ This repository implements:
 - A **downstream classifier** stage on frozen embeddings (supervised).
 
 
-# --------------[ Project Structure ]--------------
+# [ Project Structure ]
 
 ```text
 cv-contrastive-project/
@@ -25,7 +25,7 @@ cv-contrastive-project/
 ```
 
 
-# --------------------[ Setup ]--------------------
+# [ Setup ]
 
 ```bash
 git clone https://github.com/jacobsrya/cv-contrastive-project
@@ -36,11 +36,11 @@ pip install -r requirements.txt
 ```
 
 
-# -----------[ Reproducing Experiments ]-----------
+# [ Reproducing Experiments ]
 
 All of these commands were run ON WINDOWS from the project root with the virtual environment activated (`(.venv)` showing in the prompt).
 
-# Pretraining runs:
+## Pretraining runs:
 
 Run 1 - 50-epoch snapshot(s) (tau = 0.2) (used in classifiers 1, 2, and 4):
 ```bash
@@ -53,7 +53,7 @@ python -m src.contrastive_train --data_dir ./data --batch_size 128 --epochs 20 -
 ```
 
 
-# Downstream Classifiers:
+## Downstream Classifiers:
 
 Run 1 downstream classifier @ epoch 1 (Using the epoch 1 checkpoint from Run 1):
 ```bash
@@ -75,4 +75,4 @@ Run 2 downstream classifier @ epoch 20 (Using the epoch 20 checkpoint from Run 2
 python -m src.eval_classifier --data_dir ./data --checkpoint ./checkpoints_tau05/encoder_epoch_20.pt --batch_size 256 --epochs 20
 ```
 
-# See results.txt for the numerical metrics for each run (accuracy, precision, recall, F1, AUC).
+## See results.txt for the numerical metrics for each run (accuracy, precision, recall, F1, AUC).
